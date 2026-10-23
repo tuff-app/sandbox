@@ -3,14 +3,15 @@
 The code that runs inside TUFF's sandbox: a small Linux VM started with
 Apple's [`container`](https://github.com/apple/container) tool. When the
 sandbox setting is on (Settings > Search; see
-[`docs/WEB_SANDBOX.md`](../docs/WEB_SANDBOX.md)), web search, page reads
+[`docs/WEB_SANDBOX.md`](https://github.com/tuff-app/TUFF/blob/main/docs/WEB_SANDBOX.md)), web search, page reads
 and PDF reading go through this server instead of TUFF's own process. That is
 the `web` profile. The same image, started a second time with
 `SANDBOX_PROFILE=files`, is the `files` profile: a VM with no network that
 reads the folders picked for local file search (see "The files profile" below).
 
-This folder holds the VM's side. The app's side is in
-`Sources/TUFFApp/Core/Sandbox/`.
+This repository holds the VM's side. The app's side is in
+[`Sources/TUFFApp/Core/Sandbox/`](https://github.com/tuff-app/TUFF/tree/main/Sources/TUFFApp/Core/Sandbox)
+in the [TUFF repository](https://github.com/tuff-app/TUFF).
 
 | File | What it is |
 | --- | --- |
@@ -35,12 +36,12 @@ when they are missing; in a virtual environment,
 platform.)
 
 ```sh
-python3 Sandbox/test_server.py
-python3 Sandbox/test_signing.py
-python3 Sandbox/test_infra.py
+python3 test_server.py
+python3 test_signing.py
+python3 test_infra.py
 ```
 
-On a Mac with Apple `container` 1.5 or newer, `Scripts/sandbox_selftest.sh all`
+On a Mac with Apple `container` 1.5 or newer, `scripts/selftest.sh all`
 builds the image, starts it, checks the firewall, the missing privileges, the
 blocked Mac addresses and every endpoint, and stops it again; then it does the
 same for the files profile (`files-start`, `files-selftest`, `files-stop`,
@@ -50,7 +51,7 @@ read, a PDF bomb refused. Set `TUFF_SANDBOX_IMAGE` to check a pulled image
 instead of building one.
 
 To change the image (a new Python package, a newer base image) and ship it, see
-[`docs/SANDBOX_IMAGE.md`](../docs/SANDBOX_IMAGE.md): rebuild, publish, pin the
+[PUBLISHING.md](PUBLISHING.md): rebuild, publish, pin the
 new digest in the app.
 
 ## What the server promises
@@ -164,3 +165,32 @@ make the server refuse the app's requests for as long as it does that. The secre
 the VM (see the note in `server.py`). A program
 running as the same Mac user could read the secret, but it could read the user's
 files directly anyway.
+
+## Contributing
+
+TUFF is one project split across a few repositories:
+
+| Repository | What's in it |
+| --- | --- |
+| [TUFF](https://github.com/tuff-app/TUFF) | The Mac app, the `tuff` command and the inference engines |
+| [sandbox](https://github.com/tuff-app/sandbox) | The Linux VM that runs web and file search in isolation |
+| [homebrew-tap](https://github.com/tuff-app/homebrew-tap) | The Homebrew cask |
+| [tuff-app.github.io](https://github.com/tuff-app/tuff-app.github.io) | The website and benchmark leaderboard |
+
+They all follow the same
+[contributing guide](https://github.com/tuff-app/.github/blob/main/CONTRIBUTING.md),
+[maintainer roles](https://github.com/tuff-app/.github/blob/main/MAINTAINERS.md)
+and [code of conduct](https://github.com/tuff-app/.github/blob/main/CODE_OF_CONDUCT.md).
+Questions and ideas go in [Discussions](https://github.com/tuff-app/TUFF/discussions).
+
+## Security
+
+Please don't open a public issue for a security problem. Report it privately
+through GitHub's vulnerability reporting on the repository it affects, or on
+[TUFF](https://github.com/tuff-app/TUFF/security/advisories/new) if you're not
+sure which. The [security policy](https://github.com/tuff-app/.github/blob/main/SECURITY.md)
+has the details.
+
+## License
+
+[Apache 2.0](LICENSE). Model weights keep their own terms.

@@ -1,6 +1,6 @@
 # Sandbox for TUFF (web and files profiles). Built and run with Apple `container`: by
-# Scripts/sandbox_selftest.sh for development, and by the GitHub Actions
-# workflow .github/workflows/sandbox-image.yml for the published image.
+# scripts/selftest.sh for development, and by the GitHub Actions
+# workflow .github/workflows/image.yml for the published image.
 #
 # Everything the image holds is pinned, so a rebuild installs the same code:
 # - the base image by digest (python:3.12-slim);

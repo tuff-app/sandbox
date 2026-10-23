@@ -4,7 +4,7 @@ extraction, PDF reading, the /v1/http search door and the pinned transport.
 No network: resolvers and transports are fakes, or a socket on loopback.
 
 Signing, the HTTP API and the infrastructure files are tested elsewhere.
-Run with `python3 Sandbox/test_server.py` (the child processes for extraction
+Run with `python3 test_server.py` (the child processes for extraction
 and PDFs need this file to be importable as the main script). Tests that need
 trafilatura or pypdf skip without them."""
 

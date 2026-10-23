@@ -1,0 +1,29 @@
+name: Checks
+
+# Runs the sandbox's own tests for contributor pull requests, the same way
+# TUFF's checks run. It has no secrets and publishes nothing. This runner has
+# only the system python3, so the tests that need pypdf or trafilatura skip
+# here; README.md says how to run them in full.
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    name: Sandbox tests
+    if: github.event.pull_request.user.login != 'rexmhall09'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Server, signing and image files
+        run: |
+          python3 test_server.py
+          python3 test_signing.py
+          python3 test_infra.py
+          bash -n scripts/selftest.sh
+          sh -n entrypoint.sh
