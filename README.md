@@ -31,7 +31,7 @@ in the [TUFF repository](https://github.com/tuff-app/TUFF).
 
 Tests need nothing but `python3`. Tests that need `pypdf` or `trafilatura` skip
 when they are missing; in a virtual environment,
-`pip install trafilatura==2.3.0 pypdf==6.20.0` runs them all. (Do not use
+`pip install trafilatura==2.3.0 pypdf==6.21.2` runs them all. (Do not use
 `requirements.txt` for that on a Mac: its hashes are for the image's Linux
 platform.)
 
