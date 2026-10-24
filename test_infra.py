@@ -800,6 +800,47 @@ class EntrypointTests(unittest.TestCase):
         self.assertLess(established, min(blocked))
 
 
+
+EMSIGN_ECC_G3 = (
+    "-----BEGIN CERTIFICATE-----\n"
+    "MIICTjCCAdOgAwIBAgIKPPYHqWhwDtqLhDAKBggqhkjOPQQDAzBrMQswCQYDVQQG\n"
+    "EwJJTjETMBEGA1UECxMKZW1TaWduIFBLSTElMCMGA1UEChMcZU11ZGhyYSBUZWNo\n"
+    "bm9sb2dpZXMgTGltaXRlZDEgMB4GA1UEAxMXZW1TaWduIEVDQyBSb290IENBIC0g\n"
+    "RzMwHhcNMTgwMjE4MTgzMDAwWhcNNDMwMjE4MTgzMDAwWjBrMQswCQYDVQQGEwJJ\n"
+    "TjETMBEGA1UECxMKZW1TaWduIFBLSTElMCMGA1UEChMcZU11ZGhyYSBUZWNobm9s\n"
+    "b2dpZXMgTGltaXRlZDEgMB4GA1UEAxMXZW1TaWduIEVDQyBSb290IENBIC0gRzMw\n"
+    "djAQBgcqhkjOPQIBBgUrgQQAIgNiAAQjpQy4LRL1KPOxst3iAhKAnjlfSU2fySU0\n"
+    "WXTsuwYc58Byr+iuL+FBVIcUqEqy6HyC5ltqtdyzdc6LBtCGI79G1Y4PPwT01xyS\n"
+    "fvalY8L1X44uT6EYGQIrMgqCZH0Wk9GjQjBAMB0GA1UdDgQWBBR8XQKEE9TMipuB\n"
+    "zhccLikenEhjQjAOBgNVHQ8BAf8EBAMCAQYwDwYDVR0TAQH/BAUwAwEB/zAKBggq\n"
+    "hkjOPQQDAwNpADBmAjEAvvNhzwIQHWSVB7gYboiFBS+DCBeQyh+KTOgNG3qxrdWB\n"
+    "CUfvO6wIBHxcmbHtRwfSAjEAnbpV/KlK6O3t5nYBQnvI+GDZjVGLVTv7jHvrZQnD\n"
+    "+JbNR6iC8hZVdyR+EhCVBCyj\n"
+    "-----END CERTIFICATE-----\n")
+OTHER_ROOT = (
+    "-----BEGIN CERTIFICATE-----\n"
+    "MIIDlDCCAnygAwIBAgIKMfXkYgxsWO3W2DANBgkqhkiG9w0BAQsFADBnMQswCQYD\n"
+    "VQQGEwJJTjETMBEGA1UECxMKZW1TaWduIFBLSTElMCMGA1UEChMcZU11ZGhyYSBU\n"
+    "ZWNobm9sb2dpZXMgTGltaXRlZDEcMBoGA1UEAxMTZW1TaWduIFJvb3QgQ0EgLSBH\n"
+    "MTAeFw0xODAyMTgxODMwMDBaFw00MzAyMTgxODMwMDBaMGcxCzAJBgNVBAYTAklO\n"
+    "MRMwEQYDVQQLEwplbVNpZ24gUEtJMSUwIwYDVQQKExxlTXVkaHJhIFRlY2hub2xv\n"
+    "Z2llcyBMaW1pdGVkMRwwGgYDVQQDExNlbVNpZ24gUm9vdCBDQSAtIEcxMIIBIjAN\n"
+    "BgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAk0u76WaK7p1b1TST0Bsew+eeuGQz\n"
+    "f2N4aLTNLnF115sgxk0pvLZoYIr3IZpWNVrzdr3YzZr/k1ZLpVkGoZM0Kd0WNHVO\n"
+    "8oG0x5ZOrRkVUkr+PHB1cM2vK6sVmjM8qrOLqs1D/fXqcP/tzxE7lM5OMhbTI0Aq\n"
+    "d7OvPAEsbO2ZLIvZTmmYsvePQbAyeGHWDV/D+qJAkh1cF+ZwPjXnorfCYuKrpDhM\n"
+    "tTk1b+oDafo6VGiFbdbyL0NVHpENDtjVaqSW0RM8LHhQ6DqS0hdW5TUaQBw+jSzt\n"
+    "Od9C4INBdN+jzcKGYEho42kLVACL5HZpIQ15TjQIXhTCzLG3rdd8cIrHhQIDAQAB\n"
+    "o0IwQDAdBgNVHQ4EFgQU++8Nhp6w492pufEhF38+/PB3KxowDgYDVR0PAQH/BAQD\n"
+    "AgEGMA8GA1UdEwEB/wQFMAMBAf8wDQYJKoZIhvcNAQELBQADggEBAFn/8oz1h31x\n"
+    "PaOfG1vR2vjTnGs2vZupYeveFix0PZ7mddrXuqe8QhfnPZHr5X3dPpzxz5KsbEjM\n"
+    "wiI/aTvFthUvozXGaCocV685743QNcMYDHsAVhzNixl03r4PEuDQqqE/AjSxcM6d\n"
+    "GNYIAwlG7mDgfrbESQRRfXBgvKqy/3lyeqYdPV8q+Mri/Tm3R7nrft8EI6/6nAYH\n"
+    "6ftjk4BAtcZsCjEozgyfz7MjNYBBjWzEN3uBL4ChQEKF6dk4jeihU80Bv2noWgby\n"
+    "RQuQ+q7hv53yrlc8pa6yVvSLZUDp/TGBLPQ5Cdjua6e0ph0VpZj3AYHYhX3zUVxx\n"
+    "iN66zB+Afko=\n"
+    "-----END CERTIFICATE-----\n")
+
 # --- Containerfile ----------------------------------------------------------
 
 class ContainerfileTests(unittest.TestCase):
@@ -858,6 +899,38 @@ class ContainerfileTests(unittest.TestCase):
                         run.index("deb.debian.org/debian#"))
         self.assertIn("security.debian.org", run[sed:check])
         self.assertIn("nftables", run)
+
+    def test_the_ca_store_stops_trusting_emsign_ecc_root_ca_g3(self):
+        run = self.run
+        ca = "mozilla/emSign_ECC_Root_CA_-_G3.crt"
+        self.assertIn(f"ca={ca};", run)
+        self.assertIn('sed -i "s#^$ca\\$#!$ca#" /etc/ca-certificates.conf', run)
+        self.assertIn("update-ca-certificates --fresh", run)
+        update = run.index("update-ca-certificates")
+        check = run.index("86a1ecba089c4a8d3bbe2734c612ba341d813e043cf9e8a862cd5c57a36bbe6b")
+        self.assertLess(run.index("apt-get install"), update)
+        self.assertLess(run.index("fi;", update), check)
+        self.assertIn("exit 1", run[check:run.index("pip install")])
+
+    def test_the_ca_fingerprint_check_fails_on_the_root_and_on_an_empty_store(self):
+        code = re.search(r"python -c '([^']*)'", self.run).group(1)
+        self.assertIn('"/etc/ssl/certs/*"', code)
+        with tempfile.TemporaryDirectory() as folder:
+            os.mkdir(os.path.join(folder, "java"))
+
+            def check(*pems):
+                with open(os.path.join(folder, "ca-certificates.crt"), "w") as file:
+                    file.write("\n".join(pems))
+                return subprocess.run(
+                    [sys.executable, "-c", code.replace("/etc/ssl/certs", folder)]).returncode
+
+            filler = [OTHER_ROOT] * 120
+            self.assertEqual(check(*filler), 0)
+            self.assertEqual(check(*filler, EMSIGN_ECC_G3), 1)
+            self.assertEqual(check(OTHER_ROOT), 1)
+            with open(os.path.join(folder, "emsign.pem"), "w") as file:
+                file.write(EMSIGN_ECC_G3)
+            self.assertEqual(check(*filler), 1)
 
     def test_the_copy_list_has_the_five_runtime_files_and_no_tests(self):
         sources = []
