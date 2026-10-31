@@ -9,6 +9,11 @@
 # - every Python package by hash (requirements.txt, generated from
 #   requirements.in as that file describes).
 # To update, change the digest, the snapshot date and requirements.txt together.
+# The system CA store (what is used by server.py's TLS) no longer trusts emSign ECC
+# Root CA - G3: intermediates under it had their keys compromised and because of that we stop trusting the root, and that is what makes the intermediates under it untrusted.
+# Link https://emudhra.we-have-a-problem.com/
+# (GHSA-6q48-6c7w-9gw2; certifi and NSS dropped it). Drop that step once the
+# snapshot's ca-certificates package no longer ships the root.
 # The build prints the installed versions of nftables and Python so a build log
 # records them. Check the Python patch level there against CVE-2025-6069
 # (html.parser, quadratic) when the digest is updated; the server also runs its
@@ -41,6 +46,13 @@ RUN set -eux; \
     apt-get update; \
     apt-get install -y --no-install-recommends nftables; \
     dpkg-query --show nftables; python --version; \
+    ca=mozilla/emSign_ECC_Root_CA_-_G3.crt; \
+    if [ -f "/usr/share/ca-certificates/$ca" ]; then \
+      sed -i "s#^$ca\$#!$ca#" /etc/ca-certificates.conf; \
+      update-ca-certificates --fresh; \
+    fi; \
+    python -c 'import glob, hashlib, os, re, ssl, sys; bad = "86a1ecba089c4a8d3bbe2734c612ba341d813e043cf9e8a862cd5c57a36bbe6b"; pems = [p for f in glob.glob("/etc/ssl/certs/*") if os.path.isfile(f) for p in re.findall(r"-----BEGIN CERTIFICATE-----.+?-----END CERTIFICATE-----", open(f, errors="replace").read(), re.S)]; sys.exit(len(pems) < 100 or bad in {hashlib.sha256(ssl.PEM_cert_to_DER_cert(p)).hexdigest() for p in pems})' \
+      || { echo "emSign ECC Root CA - G3 is still trusted, or the CA store is missing" >&2; exit 1; }; \
     rm -rf /var/lib/apt/lists/* /etc/apt/apt.conf.d/99snapshot; \
     pip install --require-hashes --no-deps -r /app/requirements.txt; \
     useradd --uid 10001 --no-create-home --home-dir /nonexistent \
