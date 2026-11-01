@@ -50,7 +50,7 @@ env TUFF_SANDBOX_DEV_IMAGE=tuff-sandbox:dev TUFF_SANDBOX_DEV_DIGEST=$D /path/to/
 ```
 
 TUFF then runs the local image, still checking that its digest is exactly `$D`,
-and never pulls it. Turn on both switches under Settings > Search and try a
+and never pulls it. Turn on both switches under Settings > Tools and try a
 search, a page, a PDF and a folder. Also run the app's own tests
 (`Scripts/test.sh --filter Sandbox`).
 

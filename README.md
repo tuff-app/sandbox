@@ -2,7 +2,7 @@
 
 The code that runs inside TUFF's sandbox: a small Linux VM started with
 Apple's [`container`](https://github.com/apple/container) tool. When the
-sandbox setting is on (Settings > Search; see
+sandbox setting is on (Settings > Tools; see
 [`docs/WEB_SANDBOX.md`](https://github.com/tuff-app/TUFF/blob/main/docs/WEB_SANDBOX.md)), web search, page reads
 and PDF reading go through this server instead of TUFF's own process. That is
 the `web` profile. The same image, started a second time with
