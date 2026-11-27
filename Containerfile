@@ -9,18 +9,18 @@
 # - every Python package by hash (requirements.txt, generated from
 #   requirements.in as that file describes).
 # To update, change the digest, the snapshot date and requirements.txt together.
-# The system CA store (what is used by server.py's TLS) no longer trusts emSign ECC
-# Root CA - G3: intermediates under it had their keys compromised and because of that we stop trusting the root, and that is what makes the intermediates under it untrusted.
-# Link https://emudhra.we-have-a-problem.com/
-# (GHSA-6q48-6c7w-9gw2; certifi and NSS dropped it). Drop that step once the
-# snapshot's ca-certificates package no longer ships the root.
+# The system CA store (what server.py's TLS uses) no longer trusts three emSign
+# roots: ECC Root CA - G3, because intermediates under it had their keys
+# compromised (GHSA-6q48-6c7w-9gw2), and Root CA - C1 and ECC Root CA - C3,
+# which Mozilla retired at the same time. certifi and NSS dropped all three.
+# Drop that step once the snapshot's ca-certificates package no longer ships them.
 # The build prints the installed versions of nftables and Python so a build log
 # records them. Check the Python patch level there against CVE-2025-6069
 # (html.parser, quadratic) when the digest is updated; the server also runs its
 # HTML fallback parser in a killed-after-timeout child.
-FROM docker.io/library/python:3.12-slim@sha256:dddfd7e07f9d15aeeca61529320492139d21cac7f0070c00609243e51e4e0016
+FROM docker.io/library/python:3.12-slim@sha256:5e2bdb1b0d542d5039cffb8181c65930093949194a65c365dfb1b0fe13a4fa5b
 
-ARG DEBIAN_SNAPSHOT=20261001T000000Z
+ARG DEBIAN_SNAPSHOT=20261025T000000Z
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
@@ -46,13 +46,14 @@ RUN set -eux; \
     apt-get update; \
     apt-get install -y --no-install-recommends nftables; \
     dpkg-query --show nftables; python --version; \
-    ca=mozilla/emSign_ECC_Root_CA_-_G3.crt; \
-    if [ -f "/usr/share/ca-certificates/$ca" ]; then \
-      sed -i "s#^$ca\$#!$ca#" /etc/ca-certificates.conf; \
-      update-ca-certificates --fresh; \
-    fi; \
-    python -c 'import glob, hashlib, os, re, ssl, sys; bad = "86a1ecba089c4a8d3bbe2734c612ba341d813e043cf9e8a862cd5c57a36bbe6b"; pems = [p for f in glob.glob("/etc/ssl/certs/*") if os.path.isfile(f) for p in re.findall(r"-----BEGIN CERTIFICATE-----.+?-----END CERTIFICATE-----", open(f, errors="replace").read(), re.S)]; sys.exit(len(pems) < 100 or bad in {hashlib.sha256(ssl.PEM_cert_to_DER_cert(p)).hexdigest() for p in pems})' \
-      || { echo "emSign ECC Root CA - G3 is still trusted, or the CA store is missing" >&2; exit 1; }; \
+    for ca in mozilla/emSign_ECC_Root_CA_-_G3.crt mozilla/emSign_Root_CA_-_C1.crt mozilla/emSign_ECC_Root_CA_-_C3.crt; do \
+      if [ -f "/usr/share/ca-certificates/$ca" ]; then \
+        sed -i "s#^$ca\$#!$ca#" /etc/ca-certificates.conf; \
+      fi; \
+    done; \
+    update-ca-certificates --fresh; \
+    python -c 'import glob, hashlib, os, re, ssl, sys; bad = {"86a1ecba089c4a8d3bbe2734c612ba341d813e043cf9e8a862cd5c57a36bbe6b", "125609aa301da0a249b97a8239cb6a34216f44dcac9f3954b14292f2e8c8608f", "bc4d809b15189d78db3e1d8cf4f9726a795da1643ca5f1358e1ddb0edc0d7eb3"}; pems = [p for f in glob.glob("/etc/ssl/certs/*") if os.path.isfile(f) for p in re.findall(r"-----BEGIN CERTIFICATE-----.+?-----END CERTIFICATE-----", open(f, errors="replace").read(), re.S)]; sys.exit(len(pems) < 100 or bool(bad & {hashlib.sha256(ssl.PEM_cert_to_DER_cert(p)).hexdigest() for p in pems}))' \
+      || { echo "an emSign root is still trusted, or the CA store is missing" >&2; exit 1; }; \
     rm -rf /var/lib/apt/lists/* /etc/apt/apt.conf.d/99snapshot; \
     pip install --require-hashes --no-deps -r /app/requirements.txt; \
     useradd --uid 10001 --no-create-home --home-dir /nonexistent \

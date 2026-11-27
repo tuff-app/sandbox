@@ -817,6 +817,43 @@ EMSIGN_ECC_G3 = (
     "CUfvO6wIBHxcmbHtRwfSAjEAnbpV/KlK6O3t5nYBQnvI+GDZjVGLVTv7jHvrZQnD\n"
     "+JbNR6iC8hZVdyR+EhCVBCyj\n"
     "-----END CERTIFICATE-----\n")
+EMSIGN_C1 = (
+    "-----BEGIN CERTIFICATE-----\n"
+    "MIIDczCCAlugAwIBAgILAK7PALrEzzL4Q7IwDQYJKoZIhvcNAQELBQAwVjELMAkG\n"
+    "A1UEBhMCVVMxEzARBgNVBAsTCmVtU2lnbiBQS0kxFDASBgNVBAoTC2VNdWRocmEg\n"
+    "SW5jMRwwGgYDVQQDExNlbVNpZ24gUm9vdCBDQSAtIEMxMB4XDTE4MDIxODE4MzAw\n"
+    "MFoXDTQzMDIxODE4MzAwMFowVjELMAkGA1UEBhMCVVMxEzARBgNVBAsTCmVtU2ln\n"
+    "biBQS0kxFDASBgNVBAoTC2VNdWRocmEgSW5jMRwwGgYDVQQDExNlbVNpZ24gUm9v\n"
+    "dCBDQSAtIEMxMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAz+upufGZ\n"
+    "BczYKCFK83M0UYRWEPWgTywS4/oTmifQz/l5GnRfHXk5/Fv4cI7gklL35CX5VIPZ\n"
+    "HdPIWoU/Xse2B+4+wM6ar6xWQio5JXDWv7V7Nq2s9nPczdcdioOl+yuQFTdrHCZH\n"
+    "3DspVpNqs8FqOp099cGXOFgFixwR4+S0uF2FHYP+eF8LRWgYSKVGczQ7/g/IdrvH\n"
+    "GPMF0Ybzhe3nudkyrVWIzqa2kbBPrH4VI5b2P/AgNBbeCsbEBEV5f6f9vtKppa+c\n"
+    "xSMq9zwhbL2vj07FOrLzNBL834AaSaTUqZX3noleoomslMuoaJuvimUnzYnu3Yy1\n"
+    "aylwQ6BpC+S5DwIDAQABo0IwQDAdBgNVHQ4EFgQU/qHgcB4qAzlSWkK+XJGFehiq\n"
+    "TbUwDgYDVR0PAQH/BAQDAgEGMA8GA1UdEwEB/wQFMAMBAf8wDQYJKoZIhvcNAQEL\n"
+    "BQADggEBAMJKVvoVIXsoounlHfv4LcQ5lkFMOycsxGwYFYDGrK9HWS8mC+M2sO87\n"
+    "/kOXSTKZEhVb3xEp/6tT+LvBeA+snFOvV71ojD1pM/CjoCNjO2RnIkSt1XHLVip4\n"
+    "kqNPEjE2NuLe/gDEo2APJ62gsIq1NnpSob0n9CAnYuhNlCQT5AoE6TyrLshDCUrG\n"
+    "YQTlSTR+08TI9Q/Aqum6VF7zYytPT1DU/rl7mYw9wC68AivTxEDkigcxHpvOJpkT\n"
+    "+xHqmiIMERnHXhuBUDDIlhJu58tBf5E7oke3VIAb3ADMmpDqw8NQBmIMMMAVSKeo\n"
+    "WXzhriKi4gp6D/piq1JM4fHfyr6DDUI=\n"
+    "-----END CERTIFICATE-----\n")
+EMSIGN_ECC_C3 = (
+    "-----BEGIN CERTIFICATE-----\n"
+    "MIICKzCCAbGgAwIBAgIKe3G2gla4EnycqDAKBggqhkjOPQQDAzBaMQswCQYDVQQG\n"
+    "EwJVUzETMBEGA1UECxMKZW1TaWduIFBLSTEUMBIGA1UEChMLZU11ZGhyYSBJbmMx\n"
+    "IDAeBgNVBAMTF2VtU2lnbiBFQ0MgUm9vdCBDQSAtIEMzMB4XDTE4MDIxODE4MzAw\n"
+    "MFoXDTQzMDIxODE4MzAwMFowWjELMAkGA1UEBhMCVVMxEzARBgNVBAsTCmVtU2ln\n"
+    "biBQS0kxFDASBgNVBAoTC2VNdWRocmEgSW5jMSAwHgYDVQQDExdlbVNpZ24gRUND\n"
+    "IFJvb3QgQ0EgLSBDMzB2MBAGByqGSM49AgEGBSuBBAAiA2IABP2lYa57JhAd6bci\n"
+    "MK4G9IGzsUJxlTm801Ljr6/58pc1kjZGDoeVjbk5Wum739D+yAdBPLtVb4Ojavti\n"
+    "sIGJAnB9SMVK4+kiVCJNk7tCDK93nCOmfddhEc5lx/h//vXyqaNCMEAwHQYDVR0O\n"
+    "BBYEFPtaSNCAIEDyqOkAB2kZd6fmw/TPMA4GA1UdDwEB/wQEAwIBBjAPBgNVHRMB\n"
+    "Af8EBTADAQH/MAoGCCqGSM49BAMDA2gAMGUCMQC02C8Cif22TGK6Q04ThHK1rt0c\n"
+    "3ta13FaPWEBaLd4gTCKDypOofu4SQMfWh0/434UCMBwUZOR8loMRnLDRWmFLpg9J\n"
+    "0wD8ofzkpf9/rdcw0Md3f76BB1UwUCAU9Vc4CqgxUQ==\n"
+    "-----END CERTIFICATE-----\n")
 OTHER_ROOT = (
     "-----BEGIN CERTIFICATE-----\n"
     "MIIDlDCCAnygAwIBAgIKMfXkYgxsWO3W2DANBgkqhkiG9w0BAQsFADBnMQswCQYD\n"
@@ -900,16 +937,22 @@ class ContainerfileTests(unittest.TestCase):
         self.assertIn("security.debian.org", run[sed:check])
         self.assertIn("nftables", run)
 
-    def test_the_ca_store_stops_trusting_emsign_ecc_root_ca_g3(self):
+    def test_the_ca_store_stops_trusting_the_three_emsign_roots(self):
         run = self.run
-        ca = "mozilla/emSign_ECC_Root_CA_-_G3.crt"
-        self.assertIn(f"ca={ca};", run)
+        loop = run.index("for ca in ")
+        roots = run[loop:run.index("; do", loop)].split()[3:]
+        self.assertEqual(roots, ["mozilla/emSign_ECC_Root_CA_-_G3.crt", "mozilla/emSign_Root_CA_-_C1.crt",
+                                 "mozilla/emSign_ECC_Root_CA_-_C3.crt"])
         self.assertIn('sed -i "s#^$ca\\$#!$ca#" /etc/ca-certificates.conf', run)
         self.assertIn("update-ca-certificates --fresh", run)
         update = run.index("update-ca-certificates")
+        self.assertLess(run.index("apt-get install"), run.index("/etc/ca-certificates.conf"))
+        self.assertLess(run.index("/etc/ca-certificates.conf"), update)
+        for fingerprint in ("86a1ecba089c4a8d3bbe2734c612ba341d813e043cf9e8a862cd5c57a36bbe6b",
+                            "125609aa301da0a249b97a8239cb6a34216f44dcac9f3954b14292f2e8c8608f",
+                            "bc4d809b15189d78db3e1d8cf4f9726a795da1643ca5f1358e1ddb0edc0d7eb3"):
+            self.assertLess(update, run.index(fingerprint))
         check = run.index("86a1ecba089c4a8d3bbe2734c612ba341d813e043cf9e8a862cd5c57a36bbe6b")
-        self.assertLess(run.index("apt-get install"), update)
-        self.assertLess(run.index("fi;", update), check)
         self.assertIn("exit 1", run[check:run.index("pip install")])
 
     def test_the_ca_fingerprint_check_fails_on_the_root_and_on_an_empty_store(self):
@@ -926,7 +969,8 @@ class ContainerfileTests(unittest.TestCase):
 
             filler = [OTHER_ROOT] * 120
             self.assertEqual(check(*filler), 0)
-            self.assertEqual(check(*filler, EMSIGN_ECC_G3), 1)
+            for root in (EMSIGN_ECC_G3, EMSIGN_C1, EMSIGN_ECC_C3):
+                self.assertEqual(check(*filler, root), 1)
             self.assertEqual(check(OTHER_ROOT), 1)
             with open(os.path.join(folder, "emsign.pem"), "w") as file:
                 file.write(EMSIGN_ECC_G3)
